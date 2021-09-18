@@ -1,6 +1,11 @@
-public class BinarySearch{
+import java.util.NoSuchElementException;
+
+public class BinarySearch {
     public static void main(String[] args) {
-    
+        int[] input = {1,3,5,7,9};
+        int target = 2;
+        int index = binarySearch(input,target);
+        System.out.print(index);
     }
 
     /**
@@ -9,44 +14,37 @@ public class BinarySearch{
      * @param {int}target  查找目标
      * @return index 查找目标的数组下标
      */
-    public int  binarySearch(int[] input,int target){
-        int index=0;
-        int maxLen = input.length;
-        int leftIndex=0;
-        int rightIndex=maxLen;
-        
-    }
-
-    public int compare(int leftIndex,int rightIndex,int[] input,int target,int index){
+    public static int binarySearch(int[] input,int target) throws NoSuchElementException{
         // 获取中间的下标
-        int midIndex = leftIndex+getMid(rightIndex-leftIndex);
+        int mid = 0;
+        int nextMid=0;
         // 获取元素
-        int data = input[midIndex];
+        int data = 0;
+        int low=0;
+        int high = input.length-1;
         //对比目标值与所选值大小
-        if(data == target){ // 相等
-            return index = midIndex;
+        while(low<=high){
+            nextMid = (low+high)/2;
+            if(mid ==nextMid ){ // 下一个mid 的index 和 当前 mid 的index 一样，说明陷入了死循环
+                String errorMsg = "target:" + target +" is not in the array";
+                throw new NoSuchElementException(errorMsg);
+            }else{  
+                mid = nextMid; 
+                data = input[mid];
+                if(data == target){ // 相等
+                    return  mid;
+                }
+                else if(target<data){ //小于 
+                    high = mid;
+                }else{  // 大于
+                    low = mid;
+                }
+            }
+
         }
-        else if(target<data){ //小于 
-            rightIndex = midIndex;
-            compare(leftIndex,rightIndex,input,target,index);
-        }else{  // 大于
-            leftIndex = midIndex;
-        }
+        // 如果target 不在输入的数组input中，则返回目标值在数组中插入的索引值
+        return -1;
     }
 
-    /**
-     * 获取中间值
-     * @param len 长度
-     * @return 该长度的中间值
-     */
-    public int getMid(int len){
-        int mid = 0;
-        if(len%2==0){
-            mid = len/2;
-        }else{
-            mid = (len+1)/2;
-        }
-        return mid;
-    }
 }
 
