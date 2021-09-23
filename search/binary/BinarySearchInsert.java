@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 /**
- * 二分查找数组中的目标值，如无，则返回目标值插入数组中的索引值
+ * 二分查找数组中的目标值，如无，则返回将目标值插入到数组中的索引值
  * */
 public class BinarySearchInsert {
     public static void main(String[] args) {
