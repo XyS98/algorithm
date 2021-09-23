@@ -1,12 +1,12 @@
 import java.util.NoSuchElementException;
 
 /**
- * 二分查找数组中目标值，如无，则返回当前目标值插入数组中的索引
- */
+ * 二分查找数组中的目标值，如无，则返回目标值插入数组中的索引值
+ * */
 public class BinarySearchInsert {
     public static void main(String[] args) {
-        int[] input = {1,3,5,7,9};
-        int target = 2;
+        int[] input = {1,3,5,7,9,10};
+        int target = 9;
         int index = binarySearch(input,target);
         System.out.print(index);
     }
@@ -28,9 +28,10 @@ public class BinarySearchInsert {
         //对比目标值与所选值大小
         while(low<=high){
             nextMid = (low+high)/2;
-            if(mid ==nextMid ){ // 下一个mid 的index 和 当前 mid 的index 一样，说明陷入了死循环
-                String errorMsg = "target:" + target +" is not in the array";
-                throw new NoSuchElementException(errorMsg);
+            if(mid ==nextMid ){ // 下一个mid 的index 和 当前 mid 的index 一样，说明即将陷入死循环
+                // String errorMsg = "target:" + target +" is not in the array";
+                // throw new NoSuchElementException(errorMsg);
+                return high; 
             }else{  
                 mid = nextMid; 
                 data = input[mid];
