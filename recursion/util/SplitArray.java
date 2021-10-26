@@ -1,4 +1,3 @@
-import java.awt.List;
 import java.util.ArrayList;
 
 /**
@@ -12,10 +11,22 @@ public class SplitArray {
     * @param target 基准值
     * @return 
     */
-    public static ArrayList splitArrayInOrder(int[] array,int target){
+    public static ArrayList<ArrayList<Integer>> splitArrayInOrder(int[] array,int target){
         // 将数组转化为链表
-        List list = transferArrayToList(array);
-        
+        ArrayList<Integer> list = transferArrayToList(array);
+        ArrayList<Integer> smaller = new ArrayList<Integer>();
+        ArrayList<Integer> bigger = new ArrayList<Integer>();
+        ArrayList<ArrayList<Integer>> collection = new ArrayList<ArrayList<Integer>>(); 
+        for(int elem:array){
+            if(elem<target){
+                smaller.add(elem);
+            }else{
+                bigger.add(elem);
+            }
+        }
+        collection.add(0, smaller);
+        collection.add(1,bigger);
+        return collection;
     }
 
     /**
@@ -24,11 +35,9 @@ public class SplitArray {
      * @return
      */
     public static ArrayList transferArrayToList(int[] array){
-        List list = new ArrayList<>();
-        System.out.println("list结果"+ list.toString());
-        list.removeAll(); // 初始化链表
-        if(array.length=0){
-            return list.add(null); // new 的list 是否一定为空？？？？
+        ArrayList list = new ArrayList<Integer>();
+        if(array.length<1){
+            return list; // new 的list 是否一定为空？？？？
         }else{
             for(int elem:array){
                 list.add(elem);

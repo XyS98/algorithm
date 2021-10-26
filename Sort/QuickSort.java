@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 快速排序
  * 思路
@@ -10,15 +12,18 @@
 
  public class QucikSort{
 
-    public int[] quickSort(int[] array){
+    public ArrayList<Integer> quickSort(ArrayList<Integer> arrayList){
         // 递归条件
-        if(array.length<1){
-            return array;
+        if(arrayList.length<1){
+            return arrayList;
         }
         // 基线条件
          //1 选取基准值
-        int base = array[0];
+        int base = arrayList.get(0);
         //2 将数组分为小于基准值的子数组 smaller 和 大于等于基准值的子数组 bigger
-        int[] small = CopyRangeOfArray.CopyRangeOfArray();
+        ArrayList<ArrayList<Integer>> collection = SplitArray.splitArrayInOrder(arrayList, base);
+        ArrayList<Integer> small = collection.get(0); // 小于基准值的元素集合
+        ArrayList<Integer> bigger = collection.get(1); // 大于基准值的元素集合
+        //3 先分割
     }
 }
