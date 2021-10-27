@@ -1,3 +1,4 @@
+package search.binary;
 import java.util.NoSuchElementException;
 
 /**
