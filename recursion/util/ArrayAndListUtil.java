@@ -20,7 +20,7 @@ public class ArrayAndListUtil {
         for(int elem:list){
             if(elem<target){
                 smaller.add(elem);
-            }else{
+            }else if(elem>target){
                 bigger.add(elem);
             }
         }
@@ -48,11 +48,13 @@ public class ArrayAndListUtil {
 
     /**
      * 将right链表的元素依次放在left 链表末尾，实现两个链表相加
-     * @param left{ArrayList<Integer>}
-     * @param right{ArrayList<Integer>}
+     * @param left ArrayList<Integer>  小于基准值的元素集合
+     * @param base Integer 基准值
+     * @param right ArrayList<Integer> 大于基准值的元素结合
      * @return AarrayList<Integer> 相加后的链表
      */
-    public static ArrayList<Integer> addListsTogether(ArrayList<Integer> left,ArrayList<Integer> right){
+    public static ArrayList<Integer> addListsTogether(ArrayList<Integer> left,int base,ArrayList<Integer> right){
+        left.add(base);
         for(Integer e:right){
             left.add(e);
         }
