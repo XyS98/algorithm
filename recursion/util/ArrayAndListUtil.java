@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ArrayAndListUtil {
     
    /**
-    * 将链表按照基准值，分成小于基准值的元素集合与大于基准值的元素集合
+    * 将链表按照基准值，分成小于基准值的元素集合与大于等于基准值的元素集合
     * @param array{Integer[]} 原链表
     * @param target{Integer} 基准值
     * @return ArrayList<ArrayList<Integer>> index:0 small ArrayList,index:1 big ArrayList
@@ -20,7 +20,7 @@ public class ArrayAndListUtil {
         for(int elem:list){
             if(elem<target){
                 smaller.add(elem);
-            }else if(elem>target){
+            }else {
                 bigger.add(elem);
             }
         }
@@ -37,7 +37,7 @@ public class ArrayAndListUtil {
     public static ArrayList<Integer> transferArrayToList(int[] array){
         ArrayList<Integer> list = new ArrayList<Integer>();
         if(array.length<1){
-            return list; // new 的list 是否一定为空？？？？
+            return list; // new 的list 是否一定为空？？？？ --> yes --> new list.size=0
         }else{
             for(int elem:array){
                 list.add(elem);
@@ -53,11 +53,42 @@ public class ArrayAndListUtil {
      * @param right ArrayList<Integer> 大于基准值的元素结合
      * @return AarrayList<Integer> 相加后的链表
      */
-    public static ArrayList<Integer> addListsTogether(ArrayList<Integer> left,int base,ArrayList<Integer> right){
-        left.add(base);
+    public static ArrayList<Integer> addListsTogether(ArrayList<Integer> left,ArrayList<Integer> right){
         for(Integer e:right){
             left.add(e);
         }
         return left;
+    }
+
+    /**
+     * 判断 链表中第一个元素是否是链表中最小的元素
+     * @param list
+     * @return
+     */
+    public static boolean checkIsSmallest(ArrayList<Integer> list,int target){
+        for(int elem:list){
+            if(target>elem){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 遍历链表，获取链表中的第一个非最小值
+     * @param list
+     * @return
+     */
+    public static int getMidNumber(ArrayList<Integer> list){
+        int i;
+        int base,next;
+        for(i=0;i<list.size()-1;i++){
+            base = list.get(i);
+            next = list.get(i+1);
+            if(next<base){
+                return base;
+            }
+        }
+        return -1; // 说明List中任意一个元素都要小于等于后一个元素，该List已经是有序状态
     }
 }
