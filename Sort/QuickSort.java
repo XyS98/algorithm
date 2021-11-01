@@ -1,7 +1,7 @@
 package sort;
 import java.util.ArrayList;
 
-import recursion.util.ArrayAndListUtil;
+import util.ListUtil;
 
 /**
  * 快速排序
@@ -26,22 +26,22 @@ import recursion.util.ArrayAndListUtil;
         //1 选取基准值
         // 当List第一个元素为链表最小值时，选取该元素作为基准值会导致Step2分割链表时死循环,
         // 故选取第一个非最小值作为基准值
-        int base = ArrayAndListUtil.getMidNumber(arrayList);
+        int base = ListUtil.getMidNumber(arrayList);
         if(base == -1){
             return arrayList; // 说明链表已经完成排序,返回最小值
         }
          
         //2 将链表分为小于基准值的子链表 smaller 和 大于等于基准值的子链表 bigger
-        ArrayList<ArrayList<Integer>> collection = ArrayAndListUtil.splitListInOrder(arrayList, base);
+        ArrayList<ArrayList<Integer>> collection = ListUtil.splitListInOrder(arrayList, base);
         ArrayList<Integer> small = collection.get(0); // 小于基准值的元素集合
         ArrayList<Integer> bigger = collection.get(1); // 大于基准值的元素集合
         //3 递归调用quickSort，并将排序后的
-        return ArrayAndListUtil.addListsTogether(quickSort(small),quickSort(bigger));
+        return ListUtil.addListsTogether(quickSort(small),quickSort(bigger));
     }
 
     public static void main(String[] args) {
         int[] randomArray = {1,3,2,5,4,4,6};
-        ArrayList<Integer> randomList = ArrayAndListUtil.transferArrayToList(randomArray);
+        ArrayList<Integer> randomList = ListUtil.transferArrayToList(randomArray);
         QuickSort sort = new QuickSort();
         ArrayList<Integer> orderList = sort.quickSort(randomList);
         System.out.println(orderList.toString());

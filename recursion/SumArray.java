@@ -1,5 +1,6 @@
 package recursion;
-import recursion.util.CopyRangeOfArray;
+
+import util.ArrayUtil;
 
 /**
  * 使用递归，求数组的和
@@ -22,7 +23,7 @@ public class SumArray {
         if(array.length==1){
             return array[array.length-1];
         }else{
-            return array[array.length-1] +=sumArrayByRecursion(CopyRangeOfArray.copyArrayInRange(array,0,array.length-1));
+            return array[array.length-1] +=sumArrayByRecursion(ArrayUtil.copyArrayInRange(array,0,array.length-1));
         }
     }  
 }

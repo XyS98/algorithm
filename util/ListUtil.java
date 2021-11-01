@@ -1,11 +1,11 @@
-package recursion.util;
+package util;
 
 import java.util.ArrayList;
 
 /**
  * 分割数组
  */
-public class ArrayAndListUtil {
+public class ListUtil {
     
    /**
     * 将链表按照基准值，分成小于基准值的元素集合与大于等于基准值的元素集合
@@ -91,4 +91,6 @@ public class ArrayAndListUtil {
         }
         return -1; // 说明List中任意一个元素都要小于等于后一个元素，该List已经是有序状态
     }
+
+
 }

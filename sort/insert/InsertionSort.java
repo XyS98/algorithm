@@ -1,8 +1,8 @@
-package sort.insertsort;
+package sort.insert;
 
 import java.util.ArrayList;
 
-import recursion.util.ArrayAndListUtil;
+import util.ListUtil;
 
 /**
  * 简单插入排序 1.思路: 从无序集合中依次拿取元素插入到有序集合中，
@@ -10,7 +10,7 @@ import recursion.util.ArrayAndListUtil;
  *                 使得插入后的集合依然有序。
  *          2.时间复杂度:
  *              最优情况: O(n) = n-1 --> n
- *              最糟糕情况: O(n) = 1/2*(n-1)n --> n^2
+ *              最糟糕情况: O(n) = 1/2*(n-1)n --> n^2 
  */
 public class InsertionSort {
 
@@ -41,7 +41,7 @@ public class InsertionSort {
 
     public static void main(String[] args) {
         int[] disOrderArray = { 5, 7, 7, 2, 0, 4, 6 };
-        ArrayList<Integer> disOrderList = ArrayAndListUtil.transferArrayToList(disOrderArray);
+        ArrayList<Integer> disOrderList = ListUtil.transferArrayToList(disOrderArray);
         System.out.print("无序集合: "+disOrderList.toString()+"\n");
         InsertionSort sort = new InsertionSort();
         ArrayList<Integer> orderList = sort.insertionSort(disOrderList);
