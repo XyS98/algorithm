@@ -2,7 +2,7 @@ package sort.insert;
 
 import java.util.ArrayList;
 
-import util.ListUtil;
+import util.ArrayUtil;
 
 /**
  * 简单插入排序 1.思路: 从无序集合中依次拿取元素插入到有序集合中，
@@ -39,12 +39,40 @@ public class InsertionSort {
         return sortedList;
     }
 
+    /**
+     * 第二种插入排序实现方式,
+     * 只用一个集合进行排序，
+     * 要排序的元素从集合中拿出来，
+     * 找到正确位置后再插入原集合
+     * @param array
+     * @return
+     */
+    public static int[] insertionSort2(int[] array) {
+        int i, j, temp,next;
+        for (i = 0; i < array.length; i++) { // 从第二个元素开始
+            temp = array[i];
+            for (j = 1; j < array.length; j++) {
+                next = array[j];
+                if (temp > next){
+                    // 通过交换两个元素的位置的进行排序
+                    array = ArrayUtil.exchangeArrayElement(array, i, j);
+                    break; // 跳出当前循环，拿去数组的下一个元素进行排序
+                }
+            }
+        }
+        return array;
+    }
+
     public static void main(String[] args) {
         int[] disOrderArray = { 5, 7, 7, 2, 0, 4, 6 };
-        ArrayList<Integer> disOrderList = ListUtil.transferArrayToList(disOrderArray);
-        System.out.print("无序集合: "+disOrderList.toString()+"\n");
-        InsertionSort sort = new InsertionSort();
-        ArrayList<Integer> orderList = sort.insertionSort(disOrderList);
-        System.out.print("有序集合: "+orderList.toString());
+        // ArrayList<Integer> disOrderList =
+        // ListUtil.transferArrayToList(disOrderArray);
+        // System.out.print("无序集合: "+disOrderList.toString()+"\n");
+        // InsertionSort sort = new InsertionSort();
+        // ArrayList<Integer> orderList = sort.insertionSort(disOrderList);
+        // System.out.print("有序集合: "+orderList.toString());
+
+        // 测试 insertionSort2 
+        ArrayUtil.printArray(insertionSort2(disOrderArray));
     }
 }
