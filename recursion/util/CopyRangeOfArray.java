@@ -6,7 +6,7 @@ public class CopyRangeOfArray {
     public static void main(String[] args) {
         int[] array = {1,2,3,4,5};
         int[] newArray = copyArrayInRange(array, 2, 3);
-        System.out.println(PrintArrayInString.printArray(newArray));
+        System.out.println(ArrayAndListUtil.printArray(newArray));
 
     }
 

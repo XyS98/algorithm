@@ -91,4 +91,19 @@ public class ArrayAndListUtil {
         }
         return -1; // 说明List中任意一个元素都要小于等于后一个元素，该List已经是有序状态
     }
+
+     /**
+     * 遍历数组内容,拼接成字符串返回
+     * @param array 数组
+     * @return String 格式的数组内容
+     */
+    public static String printArray(int[] array){
+        int i;
+        String result = "Array:";
+        for(i=0;i<array.length;i++){
+            result += " ["+ i+"]" + array[i] +","; 
+        }
+        result = result.substring(0,result.lastIndexOf(","));
+        return result;
+    }
 }
