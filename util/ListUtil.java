@@ -45,6 +45,20 @@ public class ListUtil {
             return list;
         }
     }
+    
+    /**
+     * 将链表转为数组
+     * @param arrayList 链表
+     * @return  int[]
+     */
+    public static int[] transferListToArray(ArrayList<Integer> arrayList){
+        int[] array = new int[arrayList.size()];
+        int i ;
+        for(i=0;i<arrayList.size();i++){
+            array[i] = arrayList.get(i);
+        }
+        return array;
+    }
 
     /**
      * 将right链表的元素依次放在left 链表末尾，实现两个链表相加

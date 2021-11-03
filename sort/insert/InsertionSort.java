@@ -1,8 +1,7 @@
 package sort.insert;
 
 import java.util.ArrayList;
-
-import util.ArrayUtil;
+import util.ListUtil;
 
 /**
  * 简单插入排序 1.思路: 从无序集合中依次拿取元素插入到有序集合中，
@@ -13,7 +12,6 @@ import util.ArrayUtil;
  *              最糟糕情况: O(n) = 1/2*(n-1)n --> n^2 
  */
 public class InsertionSort {
-
 
     public  ArrayList<Integer> insertionSort(ArrayList<Integer> list){
         // 有序链表
@@ -47,32 +45,34 @@ public class InsertionSort {
      * @param array
      * @return
      */
-    public static int[] insertionSort2(int[] array) {
-        int i, j, temp,next;
-        for (i = 0; i < array.length; i++) { // 从第二个元素开始
-            temp = array[i];
-            for (j = 1; j < array.length; j++) {
-                next = array[j];
-                if (temp > next){
-                    // 通过交换两个元素的位置的进行排序
-                    array = ArrayUtil.exchangeArrayElement(array, i, j);
-                    break; // 跳出当前循环，拿去数组的下一个元素进行排序
+    public static ArrayList<Integer> insertionSort2(ArrayList<Integer> list) {
+        int i, j, current,previous;
+        for (i = 1; i < list.size(); i++) { // 从第二个元素开始,和前面的元素元素比较
+            current = list.get(i);
+            j=0;
+            while(j<i){
+                previous = list.get(j);
+                if(current<previous){ 
+                    // 将current 插入到 previous之前
+                    list.remove(i); // 将元素拿出来
+                    list.add(j, current); // 插入元素
+                    break;//插入完成,跳出当前循环，进行下一个元素的插入
                 }
+                ++j;
             }
         }
-        return array;
+        return list;
     }
 
     public static void main(String[] args) {
         int[] disOrderArray = { 5, 7, 7, 2, 0, 4, 6 };
-        // ArrayList<Integer> disOrderList =
-        // ListUtil.transferArrayToList(disOrderArray);
+        ArrayList<Integer> disOrderList =  ListUtil.transferArrayToList(disOrderArray);
         // System.out.print("无序集合: "+disOrderList.toString()+"\n");
         // InsertionSort sort = new InsertionSort();
         // ArrayList<Integer> orderList = sort.insertionSort(disOrderList);
         // System.out.print("有序集合: "+orderList.toString());
 
         // 测试 insertionSort2 
-        ArrayUtil.printArray(insertionSort2(disOrderArray));
+        System.out.println(insertionSort2(disOrderList).toString()); ;
     }
 }
