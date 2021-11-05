@@ -13,7 +13,7 @@ import util.ListUtil;
  */
 public class InsertionSort {
 
-    public  ArrayList<Integer> insertionSort(ArrayList<Integer> list){
+    public static ArrayList<Integer> insertionSort(ArrayList<Integer> list){
         // 有序链表
         ArrayList<Integer> sortedList = new ArrayList<Integer>();
         int i;
@@ -23,7 +23,7 @@ public class InsertionSort {
             inserted = 0;
                 for(i=0;i<sortedList.size();i++){
                     bigger = sortedList.get(i);
-                    // 找到比 插入元素elem大的元素bigger并插入在bigger处
+                    // 找到比 插入元素elem大的元素bigger,然后将elem插入在bigger处(bigger向后移动)
                     if(elem<bigger){ 
                         sortedList.add(i,elem);
                         inserted = 1; // 更新状态码
@@ -34,6 +34,7 @@ public class InsertionSort {
                     sortedList.add(elem);
                 }  
         }
+        System.out.println(ListUtil.pringLimitList(sortedList, 10));
         return sortedList;
     }
 
@@ -61,6 +62,7 @@ public class InsertionSort {
                 ++j;
             }
         }
+        System.out.println(ListUtil.pringLimitList(list, 10) +"\n");
         return list;
     }
 
@@ -73,6 +75,6 @@ public class InsertionSort {
         // System.out.print("有序集合: "+orderList.toString());
 
         // 测试 insertionSort2 
-        System.out.println(insertionSort2(disOrderList).toString()); ;
+        System.out.println(insertionSort2(disOrderList).toString() +"\n"); ;
     }
 }

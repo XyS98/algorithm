@@ -54,4 +54,5 @@ public class ArrayUtil {
         result = result.substring(0,result.lastIndexOf(","));
         return result;
     }
+    
 }

@@ -1,6 +1,7 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * 分割数组
@@ -106,5 +107,40 @@ public class ListUtil {
         return -1; // 说明List中任意一个元素都要小于等于后一个元素，该List已经是有序状态
     }
 
+    /**
+     * 返回一个指定长度的ArrayList,其中元素随机生成
+     * @param length list 长度
+     * @return ArrayList<Integer>
+     */
+    public static ArrayList<Integer> getRandomList(int length){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.clear();
+        int i;
+        Random random = new Random();
+        for(i=0;i<length;i++){
+            list.add(random.nextInt());
+        }
+        return list;
+    }
 
+    /**
+     * 打印List 指定长度(limit)的内容到控制台,
+     * 如果limit 超出 List总长,则打印List全部内容
+     * @param list 待打印的链表
+     * @param limit 打印的长度
+     * @return
+     */
+    public static String pringLimitList(ArrayList<Integer> list,int limit){
+        int i;
+        int size = list.size();
+        String result = "{";
+        if(limit>size){
+            limit = size;
+        }
+        for(i=0;i<limit;i++){
+            result +=list.get(i)+",";
+        }
+        result = result.substring(0, result.length()) + "}";
+        return result;
+    }
 }

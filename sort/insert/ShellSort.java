@@ -1,9 +1,10 @@
 package sort.insert;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import util.ArrayUtil;
 import util.ListUtil;
+import util.TimeUtil;
 
 /**
  * 希尔排序 1。思路: 1.1 按照一定间隔（增量:length/2）将集合中的元素分为多个子集合。
@@ -29,18 +30,46 @@ public class ShellSort {
             }   
             // 当前增量的排序完成后，缩小增量再次排序
             gap = gap/2;
-            if(gap<=1){ // 当增量缩减为 1或者0 时，集合中的极大部分元素已经变成有序状态
-                // 最后使用一次简单插入排序,对集合进行微调,完成排序
-                InsertionSort.insertionSort2(list);
-            }    
+            // if(gap<=1){ // 当增量缩减为 1或者0 时，集合中的极大部分元素已经变成有序状态
+            //     // 最后使用一次简单插入排序,对集合进行微调,完成排序
+            //     InsertionSort.insertionSort2(list);
+            // }    
         }
         return list;
     }
 
     public static void main(String[] args) {
-        int[] array = {2,5,4,8,0,4,6,7,1};
-        ArrayList<Integer> list = ListUtil.transferArrayToList(array);
-        list = shellSort(list);
-        System.out.print(list.toString());
+        //int[] array = {2,5,4,8,0,4,6,7,1};
+        int i;
+        int sumTime =0;
+        for(i=0;i<10;i++){
+            ArrayList<Integer> list = ListUtil.getRandomList(200000);
+            System.out.print("随机生成的List长度: " +list.size() + "\n");
+            // 1. 希尔排序运行记时
+            Date startDateShell = new Date();
+            long startTimeShell = startDateShell.getTime();
+            //list = InsertionSort.insertionSort(list); // 简单插入排序
+            list = shellSort(list);
+            //shellSort(list); // 希尔排序
+            Date endDateShell = new Date();
+            long endTimeShell = endDateShell.getTime();
+            long costTimeShell = endTimeShell-startTimeShell; 
+            String realTimeShell = TimeUtil.getFormateSecond(costTimeShell);   
+            sumTime += Integer.parseInt(realTimeShell);               
+            System.out.print("shellSort排序运行花费时间:" +realTimeShell + "\n");
+        }
+            System.out.print("shellSort排序10次运行花费总时间:" +sumTime + "\n");
+            System.out.println("shellSort排序10次运行花费平均时间:" + sumTime/10 + "\n");
+
+        // 简单插入排序记录时
+        /**
+        Date startDateInsert = new Date();
+        long startTimeInsert = startDateInsert.getTime();
+        Date endDateInsert = new Date();
+        long endTimeInsert = endDateInsert.getTime();
+        long costTimeInsert = endTimeInsert-startTimeInsert; 
+        String realTimeInsert = TimeUtil.getFormateSecond(costTimeInsert);                  
+        System.out.print("简单插入运行花费时间:" +realTimeInsert +"\n");
+         */
     }   
 }
