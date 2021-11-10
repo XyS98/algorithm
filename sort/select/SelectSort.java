@@ -1,4 +1,4 @@
-package sort;
+package sort.select;
 
 import java.util.ArrayList;
 /**
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *      2.最坏情况：O(n) = n^2
  *      3.一般情况：O(n) = n^2
  */ 
-public class selectSort {
+public class SelectSort {
 
     public static ArrayList<Integer> simpleSelectSort(ArrayList<Integer> list){
         int i,j;
