@@ -1,6 +1,6 @@
 package sort;
 
-import recursion.util.ArrayAndListUtil;
+import util.ArrayUtil;;
 
 /**
  * 冒泡排序
@@ -31,6 +31,6 @@ public class BubbleSort{
         int[] originArray = {4,5,1,0,3,6,2,9,8};
         BubbleSort sort = new BubbleSort();
         int[] orderedArray = sort.bubbleSort(originArray);
-        System.out.println(ArrayAndListUtil.printArray(orderedArray));
+        System.out.println(ArrayUtil.printArray(orderedArray));
     }
 }

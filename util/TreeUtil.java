@@ -41,7 +41,7 @@ public  class TreeUtil {
     public static  int getBinaryTreeLeftChildIndex(int nodeId){
         return nodeId*2-1;
     }
-
+    
     /**
      * 输入完全二叉树[数组构成]某个节点的编号[编号从1(根节点)开始 ],
      * 返回{右孩子节点}在数组中的索引
