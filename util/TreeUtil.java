@@ -52,6 +52,43 @@ public  class TreeUtil {
         return nodeId*2;
     }   
 
+    /**
+     * 计算当前节点在树中的深度
+     * @param nodeId
+     * @return
+     */
+    public static int getDepthofNode(int nodeId){
+
+        return 0;
+    }
+    /**
+     * 自下而上构建 最大堆
+     * @param array
+     * @return
+     */
+    public static int[] buildMaxHeapFromBottom(int[] array){
+        // 1. 将整个二叉树视作多个一层的子二叉树
+        //  从根节点开始,检查当前层的子二叉树，将父节点，左右孩子节点中的最大节点替换到根节点上
+        return array;
+    }
+
+    /**
+     * 将一棵二叉树构建成最大堆
+     * @param array 无序数组
+     * @param pointer 指针,正在处理的节点(二叉树中的父节点)的数组下标
+     * @return 最大堆
+     */
+    public static int[] buildMaxHeap(int[] array,int pointer){
+        // 1. 基准条件 父节点所在深度不超过二叉树的最大深度
+        if(pointer>array.length-1){
+            return array;
+        }
+        int root = array[pointer]; // 父节点
+        int leftChildNode = array[2*pointer+1]; //左孩子节点
+        int leftRigthNode = array[2*pointer+2]; //右孩子节点
+        return array;
+    }
+
     public  static void main(String[] args) {
         int[] binaryTree = {1,4,3,6,5,0,2,9,8};
         //test 1 返回某个节点的值
