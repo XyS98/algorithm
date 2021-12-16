@@ -107,7 +107,8 @@ public class TreeUtil {
     }
 
     /**
-     * 自上（最地城）而下（根节点）构建 最大堆，最小堆 
+     * 自上（最地城）而下（根节点）构建 最大堆，最小堆  
+     * 时间复杂度 O(n)=(1/2 * log2^n) 
      * @param originHeap
      * @param type
      * @return
@@ -115,12 +116,16 @@ public class TreeUtil {
     public static int[] buildHeapFromTop(int[] originHeap, int type) {
         // 1. 从最后一个父节点开始(倒水第二层最右边的节点)
         int pointerId = getLastFatherNodeId(originHeap.length);
-        if (type == 1) { // 构建最大堆
-            originHeap = buildMaxHeap(originHeap, pointerId-1);
-        } else if (type == 0) {
-            originHeap = buildMinHeap(originHeap,pointerId-1);
-        } else {
-            new Exception("当前入参type" + type + "错误," + "只能是0(最小堆)或1(最大堆)");
+        int depth = getDepthofCBTree(originHeap.length);
+        int i;
+        for (i = 0; i < depth; i++) {
+            if (type == 1) { // 构建最大堆
+                originHeap = buildMaxHeap(originHeap, pointerId - 1);
+            } else if (type == 0) {
+                originHeap = buildMinHeap(originHeap, pointerId - 1);
+            } else {
+                new Exception("当前入参type" + type + "错误," + "只能是0(最小堆)或1(最大堆)");
+            }
         }
         return originHeap;
     }
@@ -154,7 +159,7 @@ public class TreeUtil {
         if (rightChildIndex <= range) { 
             rightChildNode = originHeap[rightChildIndex];
             if (root < rightChildNode) {
-                originHeap[leftChildIndex] = root;
+                originHeap[rightChildIndex] = root;
                 originHeap[pointer] = rightChildNode;
             }
         }
@@ -191,7 +196,7 @@ public class TreeUtil {
         if (rightChildIndex <= range) { 
             rightChildNode = originHeap[rightChildIndex];
             if (root > rightChildNode) {
-                originHeap[leftChildIndex] = root;
+                originHeap[rightChildIndex] = root;
                 originHeap[pointer] = rightChildNode;
             }
         }
