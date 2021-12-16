@@ -49,7 +49,7 @@ public class ArrayUtil {
         int i;
         String result = "Array:";
         for(i=0;i<array.length;i++){
-            result += " ["+ i+"]" + array[i] +","; 
+            result += i + ":" + "["+ array[i]+"]" +", "; 
         }
         result = result.substring(0,result.lastIndexOf(","));
         return result;
