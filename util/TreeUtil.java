@@ -107,25 +107,21 @@ public class TreeUtil {
     }
 
     /**
-     * 自上（最地城）而下（根节点）构建 最大堆，最小堆  
-     * 时间复杂度 O(n)=(1/2 * log2^n) 
-     * @param originHeap
-     * @param type
+     * 自上（最地城）而下（根节点）构建 最大堆，最小堆 
+     * @param originHeap 初始无序数组
+     * @param indexRange 参与构建堆的数组中元素的索引范围
+     * @param type  0: 最小堆 1 最大堆 
      * @return
      */
-    public static int[] buildHeapFromTop(int[] originHeap, int type) {
-        // 1. 从最后一个父节点开始(倒水第二层最右边的节点)
+    public static int[] buildHeapFromTop(int[] originHeap,int indexRange, int type) {
+        // 1. 从最后一个非叶子节点 
         int pointerId = getLastFatherNodeId(originHeap.length);
-        int depth = getDepthofCBTree(originHeap.length);
-        int i;
-        for (i = 0; i < depth; i++) {
-            if (type == 1) { // 构建最大堆
-                originHeap = buildMaxHeap(originHeap, pointerId - 1);
-            } else if (type == 0) {
-                originHeap = buildMinHeap(originHeap, pointerId - 1);
-            } else {
-                new Exception("当前入参type" + type + "错误," + "只能是0(最小堆)或1(最大堆)");
-            }
+        if (type == 1) { // 构建最大堆
+            originHeap = buildMaxHeap(originHeap,indexRange,pointerId-1);
+        } else if (type == 0) {
+            originHeap = buildMinHeap(originHeap,indexRange,pointerId-1);
+        } else {
+            new Exception("当前入参type" + type + "错误," + "只能是0(最小堆)或1(最大堆)");
         }
         return originHeap;
     }
@@ -133,22 +129,23 @@ public class TreeUtil {
     /**
      * 将一棵二叉树构建成最大堆
      * @param originHeap 无序数组
+     * @param indexRange 参与堆排序的节点的数组下标范围
      * @param pointer    指针,正在处理的节点(二叉树中的父节点)的数组下标
      * @return 最大堆
      */
     // 1.初始下标 得是最后一个父节点
-    public static int[] buildMaxHeap(int[] originHeap, int pointer) {
-        if (pointer < 0) { // 整个堆已经遍历完，返回结果
+    public static int[] buildMaxHeap(int[] originHeap,int indexRange, int pointer) {
+        if (pointer < 0 || indexRange<0) { // 整个堆已经遍历完，返回结果
             return originHeap;
         }
-        int range = originHeap.length - 1;
+       // int indexRange = originHeap.length - 1;
         int leftChildIndex = 2 * pointer + 1;
         int rightChildIndex = 2 * pointer + 2;
 
         int root = originHeap[pointer]; // 父节点
         int leftChildNode; // 左孩子节点
         int rightChildNode; // 右孩子节点
-        if (leftChildIndex <= range) { // 左孩子节点存在
+        if (leftChildIndex <= indexRange) { // 左孩子节点存在
             leftChildNode = originHeap[leftChildIndex]; // 取出左孩子节点的值
             if (root < leftChildNode) { // 交换值
                 originHeap[leftChildIndex] = root;
@@ -156,7 +153,7 @@ public class TreeUtil {
                 root = leftChildNode;
             }
         }
-        if (rightChildIndex <= range) { 
+        if (rightChildIndex <= indexRange) { 
             rightChildNode = originHeap[rightChildIndex];
             if (root < rightChildNode) {
                 originHeap[rightChildIndex] = root;
@@ -164,28 +161,28 @@ public class TreeUtil {
             }
         }
         // 2. 递归调用 构建最大堆
-        return buildMaxHeap(originHeap, pointer - 1); // 向前遍历所有父节点,到根节为止
+        return buildMaxHeap(originHeap,indexRange,pointer - 1); // 向前遍历所有父节点,到根节为止
     }
 
     /**
      * 将一棵二叉树构建成最小堆
      * @param originHeap 无序数组
+     * @param indexRange 参与堆排序的节点范围
      * @param pointer    指针,正在处理的节点(二叉树中的父节点)的数组下标
      * @return 最大堆
      */
     // 1.初始下标 得是最后一个父节点
-    public static int[] buildMinHeap(int[] originHeap, int pointer) {
+    public static int[] buildMinHeap(int[] originHeap,int indexRange,int pointer) {
         if (pointer < 0) { // 整个堆已经遍历完，返回结果
             return originHeap;
         }
-        int range = originHeap.length - 1;
         int leftChildIndex = 2 * pointer + 1;
         int rightChildIndex = 2 * pointer + 2;
 
         int root = originHeap[pointer]; // 父节点
         int leftChildNode; // 左孩子节点
         int rightChildNode; // 右孩子节点
-        if (leftChildIndex <= range) { // 左孩子节点存在
+        if (leftChildIndex <= indexRange) { // 左孩子节点存在
             leftChildNode = originHeap[leftChildIndex]; // 取出左孩子节点的值
             if (root > leftChildNode) { // 交换值
                 originHeap[leftChildIndex] = root;
@@ -193,46 +190,14 @@ public class TreeUtil {
                 root = leftChildNode;
             }
         }
-        if (rightChildIndex <= range) { 
+        if (rightChildIndex <= indexRange) { 
             rightChildNode = originHeap[rightChildIndex];
             if (root > rightChildNode) {
                 originHeap[rightChildIndex] = root;
-                originHeap[pointer] = rightChildNode;
+                 originHeap[pointer] = rightChildNode;
             }
         }
         // 2. 递归调用 构建最小堆
-        return buildMinHeap(originHeap, pointer - 1); // 向前遍历所有父节点,到根节为止
-    }
-
-    public static void main(String[] args) {
-        // int[] binaryTree = {1,4,3,6,5,0,2,9,8};
-        // //test 1 返回某个节点的值
-        // int nodeId = 3;
-        // int nodeValue = binaryTree[TreeUtil.getBinaryTreeIndex(nodeId)];
-        // System.out.println("节点"+nodeId+"的值: "+nodeValue+"\n");
-        // //test 2 返回该节点的父节点 的索引
-        // int parentIndex = TreeUtil.getBinaryTreeParentIndex(nodeId);
-        // System.out.println("节点"+nodeId+"的父节点的索引: " + parentIndex+"\n");
-        // int praentValue = binaryTree[parentIndex];
-        // //test 3 返回该节点的父节点 的值
-        // System.out.println("节点"+nodeId+"的父节点的值: " + praentValue+"\n");
-        // //test 4 返回该节点左子节点的索引和值
-        // int leftChildIndex = TreeUtil.getBinaryTreeLeftChildIndex(nodeId);
-        // int leftChildValue = binaryTree[leftChildIndex];
-        // System.out.println("节点"+nodeId+"的左子节点的索引: "+leftChildIndex +" 值:
-        // "+leftChildValue+"\n");
-        // //test 4 返回该节点左子节点的索引和值
-        // int rightChildIndex = TreeUtil.getBinaryTreeRightChildIndex(nodeId);
-        // int rightChildValue = binaryTree[rightChildIndex];
-        // System.out.println("节点"+nodeId+"的左子节点的索引: "+rightChildIndex +" 值:
-        // "+rightChildValue+"\n");
-
-        int[] originHeap = { 1, 4, 3, 6, 5, 0, 2, 16, 21, 8 };
-        // test 5 测试构建最大二叉堆
-        int[] maxHeap = buildHeapFromTop(originHeap, 1);
-        System.out.println(ArrayUtil.printArray(maxHeap));
-        // test 6 测试最小堆
-        // int[] minHeap = buildMaxHeap(originHeap, 0);
-        // System.out.println(ArrayUtil.printArray(minHeap));
+        return buildMinHeap(originHeap,indexRange,pointer - 1); // 向前遍历所有父节点,到根节为止
     }
 }
