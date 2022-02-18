@@ -1,4 +1,4 @@
-package test;
+package test.hashtable;
 
 import org.junit.Test;
 import hashtable.LinearProbingHashMap;

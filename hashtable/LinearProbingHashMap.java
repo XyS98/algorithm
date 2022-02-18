@@ -19,7 +19,7 @@ public class LinearProbingHashMap<K,V>{
     private int capCoefficient=2; // 自动扩容的倍数
     private K[] keys; // 键列表
     private V[] values; // 值列表
-    private double loadCoefficient = 1; // 装载因子警戒系数 
+    private double loadCoefficient = 0.7; // 装载因子警戒系数 
     /**
      * 构造方法
      * @param capacity 设置散列表初始大小
@@ -36,6 +36,8 @@ public class LinearProbingHashMap<K,V>{
     /**
      * 散列函数 计算key的散列值 
      * 将 keys 的 哈希值与 最大整数进行 位运算，再与散列表初始大小进行 模运算
+     * 0x7fffffff : 16进制（0~9 a~f/A~F）0是符号代表正数, 每个数字4 位 7->0111 f->1111 
+     * 0x7fffffff  0111,1111,1111,1111,1111,1111,1 111,1111 (总共32位.代表最大正整数:2147483647)
     */ 
     public int hash(K key){
         return (key.hashCode() &  0x7fffffff)%originalCapacity; 
